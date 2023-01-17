@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>Hello
+			{{ prenom }}
+			{{ nom }}, vous avez
+			{{ age }}
+			ans ! ✅</h1>
+
+		{% if age > 60 %}
+			<h3>Vous êtes un senior</h3>
+		{% else %}
+			<h3>Vous êtes un jeune</h3>
+		{% endif %}
+
+		<h3>Timestamp 1638972748 converti en date :
+			{{1638972748 | date('d/m/Y H:i:s')}}
+		</h3>
+
+		{{ bienvenue | raw }}
+
+		{% include 'alert.html.twig' %}
+
+		<button type="button" class="btn btn-secondary">
+			<a href="{{path('information',{'login':'florent','age':'35'})}}" title="Acces à la vue information">vers vue Information</a>
+		</button>
+
+	</div>
+{% endblock %}

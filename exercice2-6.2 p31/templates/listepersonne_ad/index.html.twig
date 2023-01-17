@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des personnes!
+{% endblock %}
+{% block body %}
+	<table class="table" style="margin : auto;">
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">NOM</th>
+				<th scope="col">PRENOM</th>
+				<th scope="col">Date de Naissance</th>
+				<th scope="col">Email</th>
+				<th scope="col">Telephone</th>
+				<th scope="col">Rue</th>
+				<th scope="col">Codepostal</th>
+				<th scope="col">Ville</th>
+			</tr>
+		</thead>
+		{% set taille ='80px' %}
+		{% for pers in listepersonnes %}
+			<tr>
+				<td>
+					{{ pers.id }}
+				</td>
+				<td>
+					{{ pers.nom }}
+				</td>
+				<td>
+					{{ pers.prenom }}
+				</td>
+				<td>
+					{{ pers.dateNaiss| date('d-m-Y')}}
+				</td>
+				<td>
+					{{ pers.email}}
+				</td>
+				<td>
+					{{ pers.adresse.numero}}
+				</td>
+				<td>
+					{{ pers.adresse.rue}}
+				</td>
+				<td>
+					{{ pers.adresse.code_postal}}
+				</td>
+				<td>
+					{{ pers.adresse.ville}}
+				</td>
+				<td>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							{% if pers.livres is not empty %}
+								{%for livre in pers.livres %}
+									<li>Titre:
+										{{ livre.titre }}&nbsp;</li>
+									<li>Auteur:
+										{{ livre.auteur}}&nbsp;</li>
+									<li>Edition:
+										{{ livre.edition }}&nbsp;</li>
+									<li>Info:
+										{{ livre.information}}&nbsp;</li>
+								{% endfor %}
+							{% else %}
+								pas de livre
+							{% endif %}
+						</li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des personnes!
+{% endblock %}
+
+{% block body %}
+<style>
+	.example-wrapper {
+		margin: 1em auto;
+		max-width: 800px;
+		width: 95%;
+		font: 18px / 1.5 sans-serif;
+	}
+	.example-wrapper code {
+		background: #F5F5F5;
+		padding: 2px 6px;
+	}
+</style>
+
+<table class="table" style="margin : auto;">
+	<thead>
+		<tr>
+			<th scope='col'>Id</th>
+			<th scope='col'>Nom</th>
+			<th scope='col'>Prenom</th>
+			<th scope='col'>Date de naissance</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		{% set taille = '80px' %}
+		{% for pers in listepersonnes %}
+			<tr>
+				<td>{{ pers.id }}</td>
+				<td>{{ pers.nom }}</td>
+				<td>{{ pers.prenom }}</td>
+				<td>{{ pers.dateNaiss| date('d-m-Y') }}</td>
+
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
+ 
