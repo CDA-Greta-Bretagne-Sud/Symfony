@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des personnes!{% endblock %}
+
+{% block body %}
+    <table class="table" style="margin : auto;">
+        <thead> <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NOM</th>
+            <th scope="col">PRENOM</th>
+            <th scope="col">Date de Naissance</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Rue</th>
+            <th scope="col">Codepostal</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Livres</th>
+            <th scope="col">Produits achetés</th>
+        </tr>
+        </thead>
+        {% set taille ='80px' %}
+        {% for pers in listePersonnes %} <tr>
+            <td>
+                {{ pers.id }}
+            </td>
+            <td>
+                {{ pers.nom }}
+            </td>
+            <td>
+                {{ pers.prenom }}
+            </td>
+            <td>
+                {{ pers.dateNaiss| date('d-m-Y')}}
+            </td>
+            <td>
+                {{ pers.adresse.numero}}
+            </td>
+            <td>
+                {{ pers.adresse.adresse}}
+            </td>
+            <td>
+                {{ pers.adresse.codepostal}} </td>
+            <td>
+                {{ pers.adresse.ville}}
+            </td>
+            <td>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {% if pers.livre is not empty %}
+                            {% for livre in pers.livre %}
+                                <li>Titre: {{ livre.titre }}&nbsp;</li>
+                                <li>Auteur: {{ livre.auteur}}&nbsp;</li>
+                                <li>Edition: {{ livre.edition }}&nbsp;</li>
+                                <li>Info: {{ livre.information}}&nbsp;</li>
+                            {% endfor %}
+                        {% else %}
+                            pas de livre
+                        {% endif %}
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {% if pers.achatproduits is not empty %}
+                            {%for achat in pers.achatproduits %}
+                                <li>Nom: {{ achat.nom }}&nbsp;</li>
+                            <ul>
+                                <li>Prix: {{ achat.prix}}&nbsp;</li>
+                                <li>Nombre: {{ achat.nombre }}&nbsp;</li>
+                            </ul>
+                            {% endfor %}
+                        {% else %}
+                            pas d'achats
+                        {% endif %}
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
