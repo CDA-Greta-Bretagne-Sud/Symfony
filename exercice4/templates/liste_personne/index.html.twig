@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Personnes{% endblock %}
+
+{% block body %}
+    <table class="table" style="margin:auto;">
+    <a class="btn btn-info mb-2" href="{{ path('insert') }}" > Insertion d'une nouvelle personne</a>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NOM</th>
+                <th scope="col">PRENOM</th>
+                <th scope="col">Date de Naissance</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">TELEPHONE</th>
+                <th scope="col">LOGIN</th>
+                <th scope="col">Numero</th>
+                <th scope="col">Rue</th>
+                <th scope="col">Codepostal</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Livres</th>
+                <th scope="col">Produits achetés</th>
+            </tr>
+        </thead>
+        {% set taille = '80px' %}
+        {% for personne in listePersonnes %}
+            <tbody>
+                <tr>
+                    <td>{{ personne.id }}</td>
+                    <td>{{ personne.nom }}</td>
+                    <td>{{ personne.prenom }}</td>
+                    <td>{{ personne.dateNaiss| date('d-m-Y') }}</td>
+                    <td>{{ personne.email }}</td>
+                    <td>{{ personne.telephone }}</td>
+                    <td>{{ personne.login }}</td>
+                    <td>{{ personne.adresse.numero}}</td>
+                    <td>{{ personne.adresse.adresse}}</td>
+                    <td>{{ personne.adresse.codepostal}}</td>
+                    <td>{{ personne.adresse.ville}}</td>
+                    <td>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {% if personne.livre is not empty %}
+                            {% for livre in personne.livre %}
+                                <li>Titre: {{ livre.titre }}&nbsp;</li>
+                                <li>Auteur: {{ livre.auteur}}&nbsp;</li>
+                                <li>Edition: {{ livre.edition }}&nbsp;</li>
+                                <li>Info: {{ livre.information}}&nbsp;</li>
+                            {% endfor %}
+                        {% else %}
+                            pas de livre
+                        {% endif %}
+                    </li>
+                </ul>
+                </td>
+                <td>
+                 <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            {% if personne.achatproduits is not empty %}
+                                {%for achat in personne.achatproduits %}
+                                    <li>Nom: {{ achat.nom }}&nbsp;</li>
+                                <ul>
+                                    <li>Prix: {{ achat.prix }}&nbsp;</li>
+                                    <li>Nombre: {{ achat.nombre }}&nbsp;</li>
+                                </ul>
+                                {% endfor %}
+                            {% else %}
+                                pas d'achats
+                            {% endif %}
+                        </li>
+                    </ul>
+                </td>
+                    <td><a class="btn btn-warning mt-2" href="{{ path('update', {'id': personne.id }) }}">Editer</a>
+                        <a class="btn btn-danger mt-2" href="{{ path('delete', {'id': personne.id }) }}">Supprimer</a> </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}
