@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Personnes{% endblock %}
+
+{% block body %}
+    <table class="table" style="margin:auto;">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NOM</th>
+                <th scope="col">PRENOM</th>
+                <th scope="col">Date de Naissance</th>
+            </tr>
+        </thead>
+        {% set taille = '80px' %}
+        {% for personne in listePersonnes %}
+            <tbody>
+                <tr>
+                    <td>{{ personne.id }}</td>
+                    <td>{{ personne.nom }}</td>
+                    <td>{{ personne.prenom }}</td>
+                    <td>{{ personne.dateNaiss| date('d-m-Y') }}</td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}
