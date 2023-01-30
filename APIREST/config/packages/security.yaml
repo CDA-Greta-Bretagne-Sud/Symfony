@@ -34,6 +34,10 @@ security:
     access_control:
          - { path: ^/liste, roles: ROLE_ADMIN , methods: [GET]}
          - { path: ^/insert, roles: ROLE_ADMIN , methods: [POST]}
+         - { path: ^/update, roles: ROLE_ADMIN , methods: [PUT]}
+         - { path: ^/delete, roles: ROLE_ADMIN , methods: [DELETE]}
+         - { path: ^/personne, roles: ROLE_ADMIN , methods: [GET]}
+         - { path: ^/login, roles: ROLE_ADMIN , methods: [POST]}
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

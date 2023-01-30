@@ -32,6 +32,11 @@ class Personne
      */
     private $dateNaiss;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     */
+    private $id_user;
+
    
     public function getId(): ?int
     {
@@ -70,6 +75,18 @@ class Personne
     public function setDateNaiss(?\DateTimeInterface $dateNaiss): self
     {
         $this->dateNaiss = $dateNaiss;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(?User $iduser): self
+    {
+        $this->id_user = $iduser;
 
         return $this;
     }
